@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mini-rag"
+version = "0.1.0"
+description = "A small, readable retrieval-augmented generation (RAG) demo: BM25 retrieval + Claude answers with citations."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = ["anthropic"]
+keywords = ["rag", "retrieval-augmented-generation", "bm25", "llm", "claude"]
+
+[project.scripts]
+mini-rag = "rag.__main__:main"
+
+[tool.setuptools]
+packages = ["rag"]
