@@ -138,7 +138,7 @@ mini-rag/
 ├── data/                 # sample knowledge base (fictional)
 ├── examples/             # runnable usage examples
 ├── tests/                # offline unit tests (fake model client)
-├── .github/workflows/    # CI: tests on Python 3.9–3.13
+├── .github/workflows/    # CI: tests on Python 3.10–3.13
 └── pyproject.toml
 ```
 
@@ -148,7 +148,7 @@ mini-rag/
 python -m unittest discover -s tests -v
 ```
 
-The suite covers chunking, ranking quality on the sample data, prompt construction, conversation history, the no-results path and refusal handling. The model client is injected, so tests run offline and cost nothing. CI runs them on every push across Python 3.9–3.13.
+The suite covers chunking, ranking quality on the sample data, prompt construction, conversation history, the no-results path and refusal handling. The model client is injected, so tests run offline and cost nothing. CI runs them on every push across Python 3.10–3.13.
 
 ## Design decisions and limitations
 
