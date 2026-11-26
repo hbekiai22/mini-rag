@@ -126,6 +126,26 @@ I don't know based on the documents. They list shipping to EU countries, the
 United Kingdom, Norway, and Switzerland only [1].
 ```
 
+### Second dataset: course assistant
+
+[`demo/course/`](demo/course/) holds course notes for a fictional online university module: a syllabus, the late-submission policy, referencing and AI-use rules, and an assignment brief. It shows the same pipeline working as a study assistant that answers students' questions with citations to the course rules.
+
+```bash
+python -m rag --docs demo/course "What happens if I submit my assignment 2 days late?"
+python -m rag --docs demo/course "Can I use ChatGPT for my assignment?"
+python -m rag --docs demo/course "Who won the 2022 World Cup?"   # not in the notes: no answer
+```
+
+It also shows the main limit of lexical search:
+
+```
+$ python -m rag --docs demo/course --retrieve-only "How much is the literature review worth?"
+[1] syllabus.md#1  score=2.62   ## Weekly topics ... 7. Writing a literature review ...
+[2] syllabus.md#0  score=1.78   # RM501 Research Methods ... Literature review (3,000 words) | 60% ...
+```
+
+The assessment table says *weight*, the student wrote *worth*, so the weekly-topics chunk ranks first on the shared words "literature review". With `top_k=3` the model still receives the right passage, but embedding-based retrieval (see the roadmap) would rank it first.
+
 ## Project structure
 
 ```
@@ -136,6 +156,7 @@ mini-rag/
 │   ├── pipeline.py       # prompt construction and model call
 │   └── __main__.py       # command-line interface
 ├── data/                 # sample knowledge base (fictional)
+├── demo/course/          # second dataset: fictional course notes
 ├── examples/             # runnable usage examples
 ├── tests/                # offline unit tests (fake model client)
 ├── .github/workflows/    # CI: tests on Python 3.10–3.13
